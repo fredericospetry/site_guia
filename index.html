@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guia de Cultivo de Cactos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --primary-color: #193A1E; /* Verde musgo */
+            --secondary-color: #2E8B57;
+            --background-color: linear-gradient(45deg, #000000, #333333); /* Fundo degradê preto */
+            --text-color: white;
+            --font-family: Calibri, Arial, sans-serif;
+            --blue: #4169E1; /* Azul para o efeito */
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            background: var(--background-color); /* Aplicando o degradê preto */
+            color: var(--text-color);
+            user-select: none;
+        }
+
+        .menu {
+            background: linear-gradient(45deg, #000000, #333333); /* Fundo degradê preto */
+            padding: 20px 10px; /* Mais espaço vertical */
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para profundidade */
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 12px; /* Fonte menor */
+            padding: 8px 12px; /* Padding ajustado */
+            margin: 0 10px; /* Margem reduzida para juntar os botões */
+            border: 2px solid var(--blue); /* Contorno azul */
+            border-radius: 5px;
+            transition: all 150ms ease-in-out; /* Transição suave */
+            background-color: black; /* Cor de fundo preta */
+            position: relative; /* Para o efeito 3D */
+            cursor: pointer; /* Garante que o cursor mude para pointer */
+        }
+
+        .menu a.glow-on-hover {
+            width: auto; /* Ajuste para o tamanho do conteúdo */
+            height: auto; /* Ajuste para o tamanho do conteúdo */
+            border: none;
+            outline: none;
+            color: #d7d7d7; /* Cor do texto */
+            background: black; /* Cor de fundo preta */
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+            border-radius: 10px;
+        }
+
+        .menu a.glow-on-hover:before {
+            content: '';
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(5px);
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            animation: glowing 20s linear infinite;
+            opacity: 0;
+            transition: opacity .3s ease-in-out;
+            border-radius: 10px;
+        }
+
+        .menu a.glow-on-hover:hover:before {
+            opacity: 1;
+        }
+
+        .menu a.glow-on-hover:after {
+            z-index: -1;
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: black; /* Cor de fundo preta */
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+        }
+
+        .menu a.active {
+            background-color: #46699e; /* Verde ainda mais escuro para link ativo */
+            border-color: #4b4c92ec; /* Contorno neon verde */
+            box-shadow: 0 0 10px #6b65be, 0 0 20px #323492; /* Efeito neon */
+        }
+
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+            position: relative; /* Para posicionar os botões sobre a imagem */
+        }
+
+        .book-container {
+            background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            max-width: 60%;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            position: relative; /* Para posicionar os botões sobre a imagem */
+        }
+
+        img.page-image {
+            max-width: 60%; /* Imagem reduzida para 60% */
+            height: auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+            cursor: zoom-in;
+        }
+
+        img.page-image.zoomed {
+            transform: scale(1.5);
+            cursor: zoom-out;
+        }
+
+        .navigation {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .navigation button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #b3ff00; /* Azul do antigo botão de zoom */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: var(--font-family);
+            transition: background-color 0.3s ease;
+        }
+
+        .navigation button:hover {
+            background-color: #88ff00; /* Azul mais escuro ao passar o mouse */
+        }
+
+        .navigation button:disabled {
+            background-color: #ccc; /* Cinza quando desabilitado */
+            cursor: not-allowed;
+        }
+
+        /* Botões de navegação sobre a imagem */
+        .nav-overlay {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none; /* Permite clicar na imagem */
+        }
+
+        .nav-overlay button {
+            background-color: #303030; /* Azul dos botões antigos */
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            pointer-events: all; /* Permite clicar nos botões */
+            transition: background-color 0.3s ease;
+            margin: 0 20px; /* Posiciona os botões mais perto da imagem */
+        }
+
+        .nav-overlay button:hover {
+            background-color: #080808; /* Azul mais escuro ao passar o mouse */
+        }
+
+        .nav-overlay button:disabled {
+            opacity: 0.5; /* Botão desabilitado */
+            cursor: not-allowed;
+        }
+
+        /* Estilos para o copyright */
+        .copyright {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--text-color);
+            line-height: 1.2;
+        }
+        .copyright p {
+            margin: 5px 0; /* Reduzir o espaço entre os parágrafos */
+        }
+
+        .copyright a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .copyright a:hover {
+            color: #00ff00; /* Verde neon */
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00; /* Efeito neon */
+        }
+
+        @media (max-width: 768px) {
+            .book-container {
+                max-width: 90%;
+            }
+            .menu a {
+                margin: 0 6px; /* Margem reduzida em telas menores */
+                font-size: 10px; /* Fonte menor em telas menores */
+            }
+            .nav-overlay button {
+                margin: 0 10px; /* Ajuste para telas menores */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu superior -->
+    <div class="menu">
+        <a href="#" id="link-capa" class="glow-on-hover"><strong>Capa</strong></a>
+        <a href="#" data-page="4" class="glow-on-hover"><strong>Autores</strong></a>
+        <a href="#" data-page="9" class="glow-on-hover"><strong>Sumário</strong></a>
+        <a href="#" data-page="11" class="glow-on-hover"><strong>Apresentação</strong></a>
+        <a href="#" data-page="13" class="glow-on-hover"><strong>Introdução</strong></a>
+        <br><br> <!-- Espaço maior entre as linhas de botões -->
+        <a href="#" data-page="19" class="glow-on-hover"><strong>Cap. 1</strong></a>
+        <a href="#" data-page="37" class="glow-on-hover"><strong>Cap. 2</strong></a>
+        <a href="#" data-page="49" class="glow-on-hover"><strong>Cap. 3</strong></a>
+        <a href="#" data-page="63" class="glow-on-hover"><strong>Cap. 4</strong></a>
+        <a href="#" data-page="79" class="glow-on-hover"><strong>Cap. 5</strong></a>
+        <a href="#" data-page="85" class="glow-on-hover"><strong>Cap. 6</strong></a>
+        <a href="#" data-page="93" class="glow-on-hover"><strong>Cap. 7</strong></a>
+        <a href="#" id="link-ultima" class="glow-on-hover"><strong>Última Página</strong></a>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="content">
+        <div class="book-container">
+            <!-- Botões de navegação sobre a imagem -->
+            <div class="nav-overlay">
+                <button id="prev-overlay" onclick="prevPage()" disabled>‹</button>
+                <button id="next-overlay" onclick="nextPage()">›</button>
+            </div>
+
+            <!-- Imagem central -->
+            <img id="page-image" src="page_1.png" alt="Página 1" class="page-image" onclick="toggleZoom()">
+        </div>
+
+        <!-- Textos de copyright -->
+        <div class="copyright">
+            <p>© 2023 <a href="https://www.sema.rs.gov.br/upload/arquivos/202312/04140933-guia-cultivo-de-cactos.pdf" target="_blank">Guia de Cultivo de Cactos</a></p>
+            <p>© 2025 Desenvolvido por <a href="https://www.instagram.com/petryfrederico/" target="_blank">Frederico Schäffer Petry</a></p>
+        </div>
+    </div>
+
+    <script>
+        const images = [];
+        for (let i = 1; i <= 108; i++) {
+            images.push(`page_${i}.png`);
+        }
+
+        let currentPage = 0;
+
+        function updateImage() {
+            const pageImage = document.getElementById('page-image');
+            pageImage.src = images[currentPage];
+            pageImage.alt = `Página ${currentPage + 1}`;
+            updateButtons();
+            updateActiveLink();
+        }
+
+        function updateButtons() {
+            document.getElementById('prev-overlay').disabled = currentPage <= 0;
+            document.getElementById('next-overlay').disabled = currentPage >= images.length - 1;
+        }
+
+        function updateActiveLink() {
+            document.querySelectorAll('.menu a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            if (currentPage === 0) {
+                document.getElementById('link-capa').classList.add('active');
+            } else if (currentPage === images.length - 1) {
+                document.getElementById('link-ultima').classList.add('active');
+            } else {
+                const pageLinks = document.querySelectorAll(`.menu a[data-page="${currentPage + 1}"]`);
+                if (pageLinks.length > 0) {
+                    pageLinks[0].classList.add('active');
+                }
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                updateImage();
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < images.length - 1) {
+                currentPage++;
+                updateImage();
+            }
+        }
+
+        function toggleZoom() {
+            const pageImage = document.getElementById('page-image');
+            pageImage.classList.toggle('zoomed');
+        }
+
+        // Adiciona event listeners para os botões do menu superior
+        document.querySelectorAll('.menu a[data-page]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageIndex = parseInt(link.getAttribute('data-page'), 10) - 1; // Ajusta para o índice correto
+                currentPage = pageIndex;
+                updateImage();
+            });
+        });
+
+        document.getElementById('link-capa').addEventListener('click', (e) => {
+            e.preventDefault();
+            currentPage = 0; // Vai para a capa
+            updateImage();
+        });
+
+        document.getElementById('link-ultima').addEventListener('click', (e) => {
+            e.preventDefault();
+            currentPage = images.length - 1; // Vai para a última página
+            updateImage();
+        });
+
+        updateImage(); // Inicializa a página
+    </script>
+</body>
+</html>
