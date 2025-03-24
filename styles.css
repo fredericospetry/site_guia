@@ -109,13 +109,10 @@
             max-width: 60%;
             margin: 0 auto;
         }
-        img.page-image {
-            max-width: 100%;
-            max-height: 80vh;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
+            img.page-image {
+                max-width: 95vw; /* Ocupa quase toda a largura da tela */
+                max-height: 80vh;
+            }
         img.page-image.zoomed {
             transform: scale(1.5);
             cursor: zoom-out;
@@ -142,38 +139,26 @@
             background-color: #ccc;
             cursor: not-allowed;
         }
-        .nav-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            pointer-events: none;
-            padding: 0; /* Importante! */
-        }
-        .nav-overlay button {
-            background-color: rgba(48, 48, 48, 0.7);
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 10px 15px;
-            border-radius: 50%;
-            pointer-events: all;
-            z-index: 10;
-            position: absolute; /* Permite posicionamento preciso */
-        }
-        #prev-overlay {
-            left: 20%;
-            transform: none;
-        }
-        #next-overlay {
-            right: 20%;
-            transform: none;
-        }
+            .nav-overlay {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+            }
+            .nav-overlay button {
+                font-size: 1.5rem;
+                padding: 8px 12px;
+                background-color: rgba(0, 0, 0, 0.7) !important;
+            }
+            #prev-overlay {
+                left: 5vw !important; /* Colado à esquerda da imagem */
+                transform: none;
+            }
+            #next-overlay {
+                right: 5vw !important; /* Colado à direita da imagem */
+                transform: none;
+            }
         .nav-overlay button:hover {
             background-color: #080808;
         }
@@ -203,7 +188,10 @@
 
         @media (max-width: 768px) {
             .book-container {
-                max-width: 90%;
+                width: 100%;
+                max-width: 100%;
+                padding: 10px 0;
+                margin: 0;
             }
             .menu a {
                 font-size: 10px;
