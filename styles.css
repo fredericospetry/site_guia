@@ -142,38 +142,38 @@
             background-color: #ccc;
             cursor: not-allowed;
         }
-.nav-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    pointer-events: none;
-    padding: 0; /* Importante! */
-}
-.nav-overlay button {
-    background-color: rgba(48, 48, 48, 0.7);
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 10px 15px;
-    border-radius: 50%;
-    pointer-events: all;
-    z-index: 10;
-    position: absolute; /* Permite posicionamento preciso */
-}
-#prev-overlay {
-    left: 0;
-    transform: translateX(-50%);
-}
-#next-overlay {
-    right: 0;
-    transform: translateX(50%);
-}
+        .nav-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none;
+            padding: 0; /* Importante! */
+        }
+        .nav-overlay button {
+            background-color: rgba(48, 48, 48, 0.7);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 50%;
+            pointer-events: all;
+            z-index: 10;
+            position: absolute; /* Permite posicionamento preciso */
+        }
+        #prev-overlay {
+            left: 20%;
+            transform: none;
+        }
+        #next-overlay {
+            right: 20%;
+            transform: none;
+        }
         .nav-overlay button:hover {
             background-color: #080808;
         }
