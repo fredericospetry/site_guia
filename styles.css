@@ -110,12 +110,11 @@
             margin: 0 auto;
         }
         img.page-image {
-            max-width: 100%;  /* Usa 100% do container, não 60% */
-            max-height: 80vh; /* Limita a altura para não vazar */
+            max-width: 100%;
+            max-height: 80vh;
             height: auto;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-            cursor: zoom-in;
+            display: block;
+            margin: 0 auto;
         }
         img.page-image.zoomed {
             transform: scale(1.5);
@@ -148,25 +147,34 @@
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;  /* Cobrirá todo o .book-container */
+            bottom: 0;
             display: flex;
-            justify-content: space-between;  /* Botões nas extremidades */
-            align-items: center;  /* Centraliza verticalmente */
-            pointer-events: none;  /* Permite clicar na imagem */
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none;
+            padding: 0 20px;
         }
         .nav-overlay button {
-            background-color: rgba(48, 48, 48, 0.7);  /* Fundo semi-transparente */
+            background-color: rgba(48, 48, 48, 0.7);
             border: none;
             color: white;
             font-size: 24px;
             cursor: pointer;
-            padding: 10px 15px;  /* Mais largura para melhor toque */
+            padding: 10px 15px;
             border-radius: 50%;
-            pointer-events: all;  /* Permite clicar */
-            margin: 0 10px;       /* Reduz a margem lateral */
-            z-index: 10;          /* Garante que fiquem acima da imagem */
+            pointer-events: all;
+            z-index: 10;
             transition: background-color 0.3s ease;
+            margin: 0;
+            position: relative;
         }
+        #prev-overlay {
+            left: 10px;
+        }
+        #next-overlay {
+            right: 10px;
+        }
+
         .nav-overlay button:hover {
             background-color: #080808;
         }
