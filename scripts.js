@@ -11,8 +11,8 @@
             updateActiveLink();
         }
         function updateButtons() {
-            document.getElementById('prev-overlay').disabled = currentPage <= 0;
-            document.getElementById('next-overlay').disabled = currentPage >= images.length - 1;
+            document.getElementById("prev-overlay").disabled = (currentPage <= 1);
+            document.getElementById("next-overlay").disabled = (currentPage >= totalPages);
         }
         function updateActiveLink() {
             document.querySelectorAll('.menu a').forEach(link => {
